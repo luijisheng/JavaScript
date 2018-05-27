@@ -1,1 +1,183 @@
 
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册页面</title>
+		<style>
+			*{margin: 0px;padding: 0px;}
+			a{text-decoration: none;color: black;}
+			#register h2{margin-top: 50px;margin-left: 300px;}
+			
+			#register #d_box{
+				width: 500px;
+				height: 50px;
+				border: 2px solid #F2F2F2;
+				margin-top: 20px;
+				margin-left: 150px;	
+				padding-left: 10px;
+				padding-bottom: 15px;
+			}
+			
+			#register #d_box label{padding-right: 20px;font: 20px/30px "微软雅黑";}
+			
+			#register #d_box input{
+				width: 200px;
+				height: 30px;
+				margin-top: 20px;
+				outline: none;
+				border: none;
+				text-indent: 1em;
+				font-size: 20px;
+			}
+			#register #d_box span{
+				width: 200px;
+				height: 30px;
+				color: red;
+				text-align: center;
+			}
+			#register  p{
+				display: none;
+				width: 510px;
+				height: 30px;
+				font:15px/30px "微软雅黑";
+				color: gray;
+				text-align: center;
+				margin-left:150px ;
+				background-color: rgba(110,125,125,0.05);
+			}
+			#register #d_box #d_password{margin-left: 15px;}
+			
+			#register #d_submit,#d_reset{
+				width: 100px;
+				padding: 5px;
+				margin-top: 20px;
+				margin-left: 200px;
+				font-size: medium;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="register">
+			<h2><a href="http://192.168.2.120:8020/jsstudy/js/%e7%99%bb%e5%bd%95.html" target="_self">登录</a>&nbsp;&nbsp;&nbsp;注册</h2>
+			<form action="#" method="post">
+				<div id="d_box">
+					<label for="d_name">用 户 名&nbsp;</label>
+					<input type="text" id="d_name" placeholder="请输入用户名" maxlength="8"
+						onclick="namefuc()" onchange="compfuncname()" />
+					<span id="d_nameerror"></span>
+				</div>
+				<p id="d_nameruler"></p>
+				
+				<div id="d_box">
+					<label>密&nbsp;&nbsp;&nbsp;码&nbsp;</label>
+					<input type="password" id="d_password" placeholder="请输入密码" 
+						onclick="passfuc()" onchange="compfuncpass()"/>
+					<span id="d_passworderror"></span>
+				</div>
+				<p id="d_passwordruler"></p>	
+				
+				<div id="d_box">
+					<label>二次验证</label>
+					<input type="password" id="d_passwordagain" maxlength="16" placeholder="请再次输入密码"  onchange="compfuncpassagain()"/>
+					<span id="d_passworagainderror"></span>
+				</div>
+				<p id="d_passwordruler"></p>
+				
+				<div id="d_box">
+					<label>手 机 号&nbsp;</label>
+					<input type="tel" id="d_tel" maxlength="11" placeholder="请输入11位手机号" onchange="compfunctel()"/>
+					<span id="d_telerror"></span>
+				</div>
+				<p id="d_passwordruler"></p>
+				
+				
+				<div id="d_box">
+					<label>验 证 码&nbsp;</label>
+					<input type="text" id="d_code" placeholder="请输入验证码" />	
+				</div>	
+				<input type="submit" id="d_submit" value="提交" onclick="submitfunc()"/>		
+				<input type="reset" name="d_reset" id="d_reset" value="重置" />
+			</form>
+		</div>
+		
+		<script type="text/javascript">
+			function submitfunc(){
+				var str=document.getElementById("d_name").value;
+				var pw=document.getElementById("d_password").value;
+				if(!(/[a-zA-Z]{1}[a-zA-Z0-9]{2,7}/.test(str))){
+					alert("输入登录名错误");
+				}else if(!((pw.length<=16&&pw.length>=8)
+							&&(/[a-zA-Z0-9\@]{8,16}/.test(pw)))){
+					alert("输入密码错误");
+				}else{
+					alert("注册成功!");
+				}
+			}
+			
+		</script>
+		<script type="text/javascript">
+			function namefuc(){
+				document.getElementById("d_nameruler").style.display="block";
+				var x=document.getElementById("d_nameruler");
+				x.innerHTML="请输入3到8位,支持汉字,英文字母大小写和数字";
+			}
+			
+		</script>
+		<script type="text/javascript">
+			function passfuc(){
+				document.getElementById("d_passwordruler").style.display="block";
+				var x=document.getElementById("d_passwordruler");
+				x.innerHTML="请输入10到16位,支持汉字和英文字母大小写,数字和@";
+			}
+			
+		</script>
+		<script type="text/javascript">
+		 	function compfuncname(){
+				var str=document.getElementById("d_name").value;
+				if(!(/[a-zA-Z]{1}[a-zA-Z0-9]{2,7}/.test(str))){
+					document.getElementById("d_nameerror").innerHTML="输入不符合规范";
+					
+				}else{
+					document.getElementById("d_nameerror").innerHTML="√";
+				}
+			}
+		</script>
+		<script type="text/javascript">
+						
+			function compfuncpass(){
+				var pw=document.getElementById("d_password").value;
+	
+				if(!((pw.length<=16&&pw.length>=8)&&(/[a-zA-Z0-9\@]{8,16}/.test(pw)))){
+					document.getElementById("d_passworderror").innerHTML="输入密码不符合规范";
+				}else{
+					document.getElementById("d_passworderror").innerHTML="√";
+				}
+			}
+		</script>
+		<script type="text/javascript">
+				
+			function compfuncpassagain(){
+				var pwa=document.getElementById("d_passwordagain").value;
+				if(pwa==document.getElementById("d_password").value){
+					document.getElementById("d_passworagainderror").innerHTML="√";
+				}else{
+					document.getElementById("d_passworagainderror").innerHTML="密码不一致";
+				}
+			}
+			
+		</script>
+		<script type="text/javascript">
+			function compfunctel(){
+				var telphone=document.getElementById("d_tel").value;
+				if (/1[3-9][0-9]{9}/.test(telphone)) {
+					document.getElementById("d_telerror").innerHTML="√";
+				} else{
+					document.getElementById("d_telerror").innerHTML="输入不符合要求";
+				}
+			}
+			
+		</script>
+	</body>
+</html>
